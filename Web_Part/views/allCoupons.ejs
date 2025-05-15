@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coupon Cards</title>
+    <link rel="stylesheet" href="/CSS/card.css">
+</head>
+<body>
+    <!-- Include Header -->
+    <%- include("header") %>
+
+    <div class="main">
+        <% if (coupons.length === 0) { %>
+            <center><h1>No Coupons Available</h1></center>
+        <% } else { %>
+            <% coupons.forEach(coupon => { %>
+                <a href="/coupons/<%= coupon._id %>">
+                    <div class="cards">
+                        <div class="image">
+                            <img src="<%= coupon.image %>" alt="<%= coupon.Title %>">
+                        </div>
+                        <div class="title">
+                            <h2><%= coupon.Title %></h2>
+                        </div>
+                        <div class="desc">
+                            <p><strong><%= coupon.OrganizationName %></strong></p>
+                            <p><%= coupon.TandC %></p>
+                            <p>Code: <%= coupon.code %></p>
+                            <p>Price: $<%= coupon.price %></p>
+                        </div>
+                    </div>
+                </a>
+            <% }); %>
+        <% } %>
+    </div>
+
+
+    <!-- Include Footer -->
+    <%- include("footer") %>
+</body>
+</html>

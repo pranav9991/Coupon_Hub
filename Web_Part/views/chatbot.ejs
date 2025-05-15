@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coupon-Hub Chatbot</title>
+  <link rel="stylesheet" href="/css/styleschatbot.css">
+</head>
+<body>
+  <div class="app">
+    <h1>🛍️ Coupon-Hub: AI Chatbot for Savings!</h1>
+
+    <!-- Flash Messages -->
+    <% if (flashMessages.error && flashMessages.error.length > 0) { %>
+      <div class="flash-error">
+        <%= flashMessages.error %>
+      </div>
+    <% } %>
+    <% if (flashMessages.success && flashMessages.success.length > 0) { %>
+      <div class="flash-success">
+        <%= flashMessages.success %>
+      </div>
+    <% } %>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+      <% if (messages && messages.length > 0) { %>
+        <% messages.forEach(msg => { %>
+          <div class="message <%= msg.role %>">
+            <% if (msg.role === 'user') { %>
+              <p><%= msg.content %></p>
+            <% } else if (msg.role === 'assistant' && Array.isArray(msg.content)) { %>
+              <% if (msg.content.length > 0) { %>
+                <% msg.content.forEach(coupon => { %>
+                  <% if (typeof coupon === 'object' && coupon && coupon.Title && coupon._id) { %>
+                    <a href="/coupons/<%= coupon._id %>" class="coupon-link">
+                      <div class="coupon-box">
+                        <img src="<%= coupon.image %>" alt="<%= coupon.organizationName %>" class="coupon-image">
+                        <h3><%= coupon.Title %></h3>
+                        <p><strong>Code:</strong> <%= coupon.code %></p>
+                        <p><strong>Category:</strong> <%= coupon.category %></p>
+                        <p><strong>Description:</strong> <%= coupon.description %></p>
+                        <p><strong>Discount:</strong> <%= coupon.discount %>%</p>
+                        <p><strong>Expiry:</strong> <%= coupon.expiry %></p>
+                        <p><strong>Organization:</strong> <%= coupon.organizationName %></p>
+                        <p><strong>Price:</strong> $<%= coupon.price %></p>
+                        <p><strong>Status:</strong> <%= coupon.is_redeemed %></p>
+                      </div>
+                    </a>
+                  <% } %>
+                <% }); %>
+              <% } else { %>
+                <p>No coupons found for your request.</p>
+              <% } %>
+            <% } else { %>
+              <p><%= typeof msg.content === 'string' ? msg.content : JSON.stringify(msg.content) %></p>
+            <% } %>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p class="no-messages">Start chatting to find coupons!</p>
+      <% } %>
+    </div>
+
+    <!-- Input Form -->
+    <form action="/chatbot" method="POST" class="input-container">
+      <input
+        type="text"
+        name="message"
+        placeholder="Ask me about coupons..."
+        autocomplete="off"
+        required
+      />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>

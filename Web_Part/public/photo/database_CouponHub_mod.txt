@@ -1,0 +1,46 @@
+CREATE TABLE USERS (
+  user_id NUMBER PRIMARY KEY,
+  name VARCHAR2(255),
+  email VARCHAR2(255),
+  phone_no VARCHAR2(20),
+  password VARCHAR2(255),
+);
+
+
+CREATE TABLE COUPON (
+    cid INT PRIMARY KEY,
+    type VARCHAR2(50),
+    organisation VARCHAR2(100),
+    title VARCHAR2(255),
+    code VARCHAR2(50),
+    price DECIMAL(10, 2),
+    exp_date DATE,
+    photo varchar2(200),
+    terms_and_conditions VARCHAR2(500)
+);
+
+
+CREATE TABLE ADMIN (
+    admin_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    phone_no VARCHAR(20)
+);
+
+
+
+
+
+
+
+INSERT INTO COUPON (cid, type, company, title, code, price, exp_date, terms_and_conditions)
+VALUES (1, 'Food', 'PAPA JOHN''S', 'Extra 25% Off Your Order', 'SM25', 0, TO_DATE('1/10/2024', 'MM/DD/YYYY'), 'EXCLUSIONS Ends soon. Excludes Specials DETAILS Not Valid on Specials');
+
+
+INSERT INTO COUPON (cid, type, company, title, code, price, exp_date, terms_and_conditions)
+VALUES (2, 'Books', 'QUICKBOOKS', '30% Off sitewide', 'PAPPORTAL30', 0, TO_DATE('11/1/2024', 'MM/DD/YYYY'), 'NA');
+
+INSERT INTO COUPON (cid, type, company, title, code, price, exp_date, terms_and_conditions)
+VALUES (3, 'Caps', 'OLD NAVY', '30% Off your Purchase', 'HURRY', 0, TO_DATE('8/12/2024', 'MM/DD/YYYY'), 'Online Exclusive');
+

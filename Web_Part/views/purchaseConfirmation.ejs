@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Confirmation</title>
+  <link rel="stylesheet" href="/CSS/style.css">
+  <link rel="stylesheet" href="/CSS/purchaseConfirmation.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <%- include('header') %>
+  <main class="confirmation-container">
+    <div class="confirmation-card">
+      <div class="confirmation-header">
+        <div class="success-icon">🎉</div>
+        <h1>Purchase Confirmed!</h1>
+      </div>
+      <div class="confirmation-body">
+        <p class="confirmation-message">You've successfully purchased your coupon. Enjoy your savings!</p>
+        <div class="coupon-info">
+          <img src="<%= coupon.image %>" alt="<%= coupon.organizationName %>" class="coupon-logo">
+          <h2><%= coupon.Title %></h2>
+          <p><strong>Organization:</strong> <%= coupon.organizationName %></p>
+          <p><strong>Discount:</strong> <%= coupon.discount %>% OFF</p>
+          <p><strong>Code:</strong> <%= coupon.code %></p>
+          <p><strong>Price Paid:</strong> ₹<%= coupon.price %></p>
+          <p><strong>Valid Until:</strong> <%= coupon.expiry %></p>
+          <p><strong>Description:</strong> <%= coupon.description %></p>
+        </div>
+        <div class="confirmation-actions">
+          <a href="/allCoupons" class="btn-primary">Explore More Coupons</a>
+          <a href="/" class="btn-secondary">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <%- include('footer') %>
+  <script src="/js/script.js"></script>
+</body>
+</html>

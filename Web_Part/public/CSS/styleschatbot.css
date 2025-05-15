@@ -1,0 +1,226 @@
+/* Reset default margins and ensure box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main app container */
+.app {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Heading */
+.app h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Coupon link (wraps coupon-box to make it clickable) */
+.coupon-link {
+  text-decoration: none; /* Remove default link underline */
+  color: inherit; /* Prevent blue link color */
+  display: block; /* Make entire coupon-box clickable */
+}
+
+/* Coupon box styling */
+.coupon-box {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: background-color 0.2s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for coupon box */
+.coupon-link:hover .coupon-box {
+  background-color: #f5f5f5; /* Light gray on hover */
+  cursor: pointer; /* Indicate clickability */
+}
+
+/* Ensure all text inside coupon-box is not blue */
+.coupon-box h3,
+.coupon-box p,
+.coupon-box strong {
+  color: #333; /* Dark gray text color */
+}
+
+/* Coupon box heading */
+.coupon-box h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Coupon box paragraphs */
+.coupon-box p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* Strong tags for labels */
+.coupon-box strong {
+  font-weight: bold;
+}
+
+/* Coupon image */
+.coupon-image {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+/* Chat container */
+.chat-container {
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto; /* Scroll if too many messages */
+  border: 1px solid #eee;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+  border-radius: 5px;
+}
+
+/* Empty state message */
+.no-messages {
+  color: #666;
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+}
+
+/* User message */
+.message.user {
+  text-align: right;
+  margin: 5px;
+}
+
+/* User message content */
+.message.user p {
+  display: inline-block;
+  background-color: #e6f3ff; /* Light blue */
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-width: 70%;
+  font-size: 14px;
+  color: #333; /* Ensure text is not blue */
+}
+
+/* Assistant message */
+.message.assistant {
+  text-align: left;
+  margin: 5px;
+}
+
+/* Assistant message content */
+.message.assistant p {
+  display: inline-block;
+  background-color: #f0f0f0; /* Light gray */
+  padding: 10px 15px;
+  border-radius: 10px;
+  max-width: 70%;
+  font-size: 14px;
+  color: #333; /* Ensure text is not blue */
+}
+
+/* Flash error message */
+.flash-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Flash success message */
+.flash-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Input container (form) */
+.input-container {
+  display: flex;
+  gap: 10px;
+}
+
+/* Input field */
+.input-container input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Input focus */
+.input-container input[type="text"]:focus {
+  border-color: #666;
+}
+
+/* Submit button */
+.input-container button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Button hover */
+.input-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .app {
+    padding: 10px;
+  }
+
+  .app h1 {
+    font-size: 20px;
+  }
+
+  .coupon-box {
+    padding: 10px;
+  }
+
+  .coupon-image {
+    max-width: 80px;
+  }
+
+  .chat-container {
+    max-height: 400px;
+  }
+
+  .input-container {
+    flex-direction: column;
+  }
+
+  .input-container input[type="text"],
+  .input-container button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,9 @@
+streamlit
+requests
+flask
+flask-cors
+pymongo
+bson
+python-dotenv
+langchain
+google-generativeai
