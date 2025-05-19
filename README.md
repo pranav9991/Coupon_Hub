@@ -1,6 +1,6 @@
 # 🏷️ Coupon-Hub Chatbot
 
-**Coupon-Hub** is an AI-powered chatbot that helps users find relevant and active coupons based on their voice or text queries. It combines **Google's Gemini AI** for intelligent response generation, **MongoDB** for storing coupon data, **Flask** for backend APIs, and **Streamlit** for a sleek and interactive frontend.
+**Coupon-Hub** is an AI-powered chatbot that helps users find relevant and active coupons based on text queries. It combines **Google's Gemini AI** for intelligent response generation, **MongoDB** for storing coupon data, **Flask** for backend APIs, and **Streamlit** for a sleek and interactive frontend.
 
 ---
 
