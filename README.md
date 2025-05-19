@@ -59,14 +59,6 @@ Enter a query in the chat input field (e.g., "I want a discount on pizza").
 The chatbot will respond with a list of relevant coupons (if any) or a message indicating no matches.
 Chat history is preserved during the session via Streamlit's session state.
 
-Project Structure
-coupon-hub-chatbot/
-├── app2.py               # Flask backend API with chatbot logic
-├── db.py                 # MongoDB setup and sample data insertion
-├── streamlit_app.py      # Streamlit frontend for chat interface
-├── requirements.txt      # Python dependencies
-├── .env                  # Environment variables (not tracked in git)
-└── README.md             # Project documentation
 
 Database Schema
 The coupon_hub database contains a coupons collection with the following fields:
