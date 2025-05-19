@@ -1,97 +1,192 @@
-# Coupon-Hub Chatbot
-Overview
-Coupon-Hub is an AI-powered chatbot designed to help users find relevant coupons based on their queries. It leverages the Gemini AI model for natural language processing, MongoDB for coupon storage, Flask for the backend API, and Streamlit for the frontend interface. The chatbot fetches non-redeemed coupons from a MongoDB database, matches them to user input, and returns the most suitable coupon details.
-Features
+# 🏷️ Coupon-Hub Chatbot
 
-AI-Powered Coupon Matching: Uses Google's Gemini AI to analyze user queries and recommend relevant coupons.
-MongoDB Integration: Stores and retrieves coupon data, including descriptions, discounts, vendors, and expiry dates.
-Flask Backend: Provides a RESTful API endpoint (/chatbot) for processing user queries.
-Streamlit Frontend: Offers a user-friendly chat interface to interact with the chatbot.
-CORS Support: Enables cross-origin requests for flexible frontend-backend communication.
+**Coupon-Hub** is an AI-powered chatbot that helps users find relevant and active coupons based on their voice or text queries. It combines **Google's Gemini AI** for intelligent response generation, **MongoDB** for storing coupon data, **Flask** for backend APIs, and **Streamlit** for a sleek and interactive frontend.
 
-Prerequisites
+---
 
-Python 3.8 or higher
-MongoDB Atlas account (or local MongoDB instance)
-Google API key for Gemini AI
-Git (optional, for cloning the repository)
+## ✨ Features
 
-Installation
-1. Clone the Repository
+- 🤖 **AI-Powered Coupon Matching**  
+  Uses Google Gemini (via `gemini-2.0-flash`) to understand user needs and suggest relevant coupons.
+
+- 🗂️ **MongoDB Integration**  
+  Stores coupon details like description, discount, vendor, expiry, and redemption status.
+
+- 🧠 **RAG-like Filtering**  
+  Fetches unredeemed coupons from the database and matches them with user intent.
+
+- 🔗 **RESTful Flask API**  
+  Handles chat logic at the `/chatbot` endpoint.
+
+- 💬 **Streamlit Chat UI**  
+  An intuitive frontend chat interface built with Streamlit.
+
+- 🔄 **CORS Support**  
+  Seamless communication between frontend and backend across origins.
+
+---
+
+## 📦 Prerequisites
+
+- Python 3.8+
+- MongoDB Atlas account (or local MongoDB setup)
+- Google API key for Gemini AI
+- Git (optional, for cloning)
+
+---
+
+## 🛠️ Installation
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/your-username/coupon-hub-chatbot.git
 cd coupon-hub-chatbot
+````
 
-2. Set Up a Virtual Environment
+### 2. Set Up a Virtual Environment
+
+```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate      # On Windows: venv\Scripts\activate
+```
 
-3. Install Dependencies
-Install the required Python packages listed in requirements.txt:
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-4. Configure Environment Variables
-Create a .env file in the project root and add your Google API key:
+---
+
+## 🔐 Configuration
+
+Create a `.env` file in the root directory:
+
+```
 GOOGLE_API_KEY=your_google_api_key_here
+```
 
-Replace your_google_api_key_here with your actual Google API key for Gemini AI.
-5. Set Up MongoDB
+> ⚠️ Replace `your_google_api_key_here` with your actual Google API key.
 
-MongoDB Atlas: Use the provided MongoDB URI in app2.py and db.py (or replace with your own).
-Local MongoDB: Update the MONGO_URI in app2.py and db.py to point to your local MongoDB instance (e.g., mongodb://localhost:27017).
-Run db.py to populate the coupon_hub database with sample coupon data:python db.py
+---
 
+## 🛢️ MongoDB Setup
 
+* **MongoDB Atlas**: Use your connection string in both `app2.py` and `db.py`
+* **Local MongoDB**: Update `MONGO_URI` in both files to `mongodb://localhost:27017`
 
-Usage
-1. Start the Flask Backend
-Run the Flask server to handle chatbot API requests:
+Then, populate the database:
+
+```bash
+python db.py
+```
+
+This seeds the `coupon_hub` database with sample coupon data.
+
+---
+
+## 🚀 Usage
+
+### 1. Start the Flask Backend
+
+```bash
 python app2.py
+```
 
-The server will start at http://127.0.0.1:5000 by default.
-2. Launch the Streamlit Frontend
-In a separate terminal, activate the virtual environment and run the Streamlit app:
+> The server starts at [http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+### 2. Launch the Streamlit Frontend
+
+Open a new terminal (in the same environment):
+
+```bash
 streamlit run streamlit_app.py
+```
 
-The Streamlit interface will open in your default browser (typically at http://localhost:8501).
-3. Interact with the Chatbot
+> This opens the app at [http://localhost:8501](http://localhost:8501)
 
-Enter a query in the chat input field (e.g., "I want a discount on pizza").
-The chatbot will respond with a list of relevant coupons (if any) or a message indicating no matches.
-Chat history is preserved during the session via Streamlit's session state.
+---
+
+## 💬 Interacting with the Chatbot
+
+* Enter your query in the text field (e.g., *"Any deals on pizza?"*)
+* The chatbot processes your request and returns:
+
+  * 🏷️ Coupon description
+  * 🛍️ Vendor
+  * 💰 Discount
+  * 📆 Expiry date
+* Chat history is preserved via session state.
+
+---
+
+## 🧾 Database Schema
+
+Collection: `coupons` in `coupon_hub` database
+
+| Field         | Description                                              |
+| ------------- | -------------------------------------------------------- |
+| `category`    | Coupon category (e.g., Food, Fashion, Electronics)       |
+| `description` | Description of the offer (e.g., "Get 20% off Pizza Hut") |
+| `discount`    | Type of discount (e.g., "20%", "BOGO")                   |
+| `vendor`      | Vendor name (e.g., Pizza Hut, Nike)                      |
+| `expiry`      | Expiry date (e.g., `"2025-04-10"`)                       |
+| `is_redeemed` | Redemption status (`False` for active)                   |
+| `created_at`  | Timestamp of coupon creation                             |
+
+---
+
+## ⚠️ Notes
+
+* Ensure consistency:
+
+  * `app2.py` expects `is_redeemed = "on"`, while `db.py` uses `False`.
+    👉 Update `app2.py` to check for `is_redeemed == False` if using `db.py`.
+
+* The Flask app runs in **debug mode**. Disable for production:
+
+  ```python
+  app.run(debug=False)
+  ```
+
+* If deployed externally, **update `API_URL` in `streamlit_app.py`**
+
+* Do **NOT** commit `.env` to version control. Add to `.gitignore`.
+
+---
+
+## 🧰 Troubleshooting
+
+| Issue                       | Solution                                                                  |
+| --------------------------- | ------------------------------------------------------------------------- |
+| 🔌 MongoDB connection error | Check `MONGO_URI`, and whitelist your IP in MongoDB Atlas                 |
+| ❌ Gemini API error          | Verify your Google API key and Gemini model access                        |
+| 🧾 JSON decode issues       | Print or log `cleaned_reply` in `app2.py` to inspect unexpected responses |
+| 🔒 CORS error               | Ensure `flask-cors` is installed and used in `app2.py`                    |
+
+---
+
+## 🙌 Contributing
+
+We welcome contributions!
+To get started:
+
+bash
+# Fork the repo, then:
+git checkout -b feature/your-feature
+# Make changes, then:
+git commit -m "Add your feature"
+git push origin feature/your-feature
+# Open a pull request 🚀
 
 
-Database Schema
-The coupon_hub database contains a coupons collection with the following fields:
+---
 
-category: Coupon category (e.g., Food, Clothing, Electronics)
-description: Coupon description (e.g., "Get 20% off on Pizza Hut orders above $20")
-discount: Discount value (e.g., "20%", "BOGO")
-vendor: Vendor name (e.g., Pizza Hut, Adidas)
-expiry: Expiry date (e.g., "2025-04-10")
-is_redeemed: Redemption status (boolean or string "on"/"off")
-created_at: Creation timestamp
+## 🧑‍💻 Author
 
-Notes
+**Prannav Parasar**
+📫 pranavparasar99@gmail.com
 
-The is_redeemed field in app2.py checks for a string value "on", while db.py uses a boolean False. Ensure consistency in your database (update app2.py to check is_redeemed: False if using db.py as-is).
-The Flask server runs in debug mode by default. Disable debug mode (app.run(debug=False)) for production.
-Update the API_URL in streamlit_app.py if deploying the Flask backend to a different host/port.
-Secure your MongoDB credentials and Google API key by excluding .env from version control (add to .gitignore).
-
-Troubleshooting
-
-MongoDB Connection Issues: Verify your MONGO_URI and ensure your IP is whitelisted in MongoDB Atlas.
-Gemini API Errors: Check your Google API key and ensure the Gemini model (gemini-2.0-flash) is accessible.
-JSON Parsing Errors: If the Gemini response format is inconsistent, inspect the cleaned_reply in app2.py logs.
-CORS Errors: Ensure flask-cors is installed and configured correctly.
-
-Contributing
-Contributions are welcome! Please:
-
-Fork the repository.
-Create a feature branch (git checkout -b feature/your-feature).
-Commit changes (git commit -m 'Add your feature').
-Push to the branch (git push origin feature/your-feature).
-Open a pull request.
-
+---
 
