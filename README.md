@@ -106,6 +106,8 @@ streamlit run streamlit_app.py
 
 > This opens the app at [http://localhost:8501](http://localhost:8501)
 
+### 3. Run index.js file if Using with Website or Webpart instead of Streamlit
+
 ---
 
 ## 💬 Interacting with the Chatbot
